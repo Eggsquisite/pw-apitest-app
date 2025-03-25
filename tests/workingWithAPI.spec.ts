@@ -8,6 +8,7 @@ const pass = 'Marcp@ss123'
 
 test.beforeEach(async ({page}) => {
   // when want to mock API, need to configure in playwright before browser makes call to API
+  // Creating custom tags via mock API request using our own tags.json file
   // await page.route('https://conduit-api.bondaracademy.com/api/tags', async route => { // request URL 
   await page.route('*/**/api/tags', async route => { // match any pattern before /api/tags
     await route.fulfill({
@@ -16,10 +17,11 @@ test.beforeEach(async ({page}) => {
   }) 
 
   await page.goto('https://conduit.bondaracademy.com/');
-  await page.getByText('Sign in').click()
-  await page.getByRole('textbox', {name: "Email"}).fill('marctest@test.com')
-  await page.getByRole('textbox', {name: "Password"}).fill('Marcp@ss123')
-  await page.getByRole('button').click()
+  // Authentication done in auth.setup.ts
+  // await page.getByText('Sign in').click()
+  // await page.getByRole('textbox', {name: "Email"}).fill('marctest@test.com')
+  // await page.getByRole('textbox', {name: "Password"}).fill('Marcp@ss123')
+  // await page.getByRole('button').click()
 });
 
 
