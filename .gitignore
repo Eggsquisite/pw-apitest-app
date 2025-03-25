@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 playwright-report/index.html
 /playwright-report
+.auth/
