@@ -31,6 +31,6 @@ setup('authentication', async({page, request}) => {
     user.origins[0].localStorage[0].value = accessToken
     fs.writeFileSync(authFile, JSON.stringify(user))
 
-    // built in feature in node.js - env variable
+    // built in feature in node.js - env variable - allows us to reuse token value putting in CONFIG
     process.env['ACCESS_TOKEN'] = accessToken
 })

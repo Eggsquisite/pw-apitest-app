@@ -54,12 +54,6 @@ test('has title', async ({ page }) => {
 
 
 test('Delete article', async({page, request}) =>{
-  // const loginResponse = await request.post('https://conduit-api.bondaracademy.com/api/users/login', {
-  //   data: {
-  //     "user":{"email":"marctest@test.com","password":"Marcp@ss123"}
-  //   }
-  // })
-
   // const responseBody = await loginResponse.json() // Give us representation of response
   // const accessToken = responseBody.user.token
   //console.log(responseBody)
@@ -73,14 +67,13 @@ test('Delete article', async({page, request}) =>{
   //   }
   // }
 
+  // header: Authorization: `Token ${ACCESS_TOKEN}` is done automatically thru config
   const articleResponse = await request.post('https://conduit-api.bondaracademy.com/api/articles/', {
     data: {
       "article":{"title":"test title article","description":"etst","body":"test","tagList":[]}
-    },
-    // headers: {
-    //   Authorization: `Token ${accessToken}`
-    // }, NO LONGER NEED WITH ENV VARIABLE BEING USED AUTOMATICALLY IN CONFIG
+    }
   })
+  console.log(await articleResponse.json()) // Helps with debugging API status message
   expect(articleResponse.status()).toEqual(201)
 
   await page.getByText('Global Feed').click()
@@ -92,7 +85,7 @@ test('Delete article', async({page, request}) =>{
 });
 
 
-test('create article', async({page, request}) => {
+test.only('create article', async({page, request}) => {
   await page.getByText('New Article').click()
   await page.getByRole('textbox', {name: "Article Title"}).fill('Playwright is awesome')
   await page.getByRole('textbox', {name: "What\'s this article about?"}).fill('About the Playwright')
